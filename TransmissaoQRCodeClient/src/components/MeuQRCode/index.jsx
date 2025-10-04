@@ -5,6 +5,7 @@ export function MeuQRCode(){
     const { codigo } = useCodigoContext()
 
     const copiarCodigo = async () => {
+        console.log(codigo)
         await navigator.clipboard.writeText(codigo);
     }
 

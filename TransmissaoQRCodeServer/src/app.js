@@ -6,7 +6,7 @@ export const app = fastify()
 
 app.register(fastifySocketIO, {
   cors: {
-    origin: ['https://localhost:3003', '*'],
+    origin: '*',
     methods: ['GET', 'PUT', 'PATCH', 'POST', 'DELETE'],
     allowedHeaders: ['Authorization', 'Content-Type'],
     exposedHeaders: ['Authorization', 'Content-Type'],

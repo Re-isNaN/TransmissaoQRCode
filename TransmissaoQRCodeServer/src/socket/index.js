@@ -9,28 +9,42 @@ export const socketStart = async () => {
     app.io.on('connection', (socket) => {
       console.log('Alguem se conectou:', socket.id)
 
-      // para o cliente ter acesso a pedir com qrcode
+      /**
+       * @description o usuário se conecta a uma sala para poder receber eventos
+       */
       socket.on('join-usuario', async () => {
         socket.join(`usuario-${socket.id}`)
 
-        // guarda o id enviar depois
+        /**
+        * @description envia o id da sala que foi conectado para poder salvar e copiar
+        */
         socket.emit('id-qrcode', socket.id)
       })
 
-      // aqui é disparado quando o qrcode é lido
+      
+      /**
+      * @description evento disparado quando o usuário que receber a mensagem de um cliente na sala 'room'
+      */
       socket.on('receber-msg', (room) => {
         console.log(room)
-        // emite um evento para o usuario pedindo o pedido
+       
+        /**
+        * @description emite um evento para o cliente requisitando o envio da mensagem, com o socket id de quem está requisitando
+        */
         socket.to(`usuario-${room}`).emit('envio-msg', socket.id)
       })
 
-      // evento disparado quando o usuario manda o pedido
+      /**
+      * @description evento emitido para transmitir a mensagem para o cliente que pediu
+      */
       socket.on('msg', ({ room, msg }) => {
 
         console.log(msg)
         console.log(room)
 
-        // envia o pedido para o garcom que requisitou
+        /**
+        * @description envia a mensagem para quem requisitou
+        */
         socket.to(room).emit('msg', msg)
       })
     })
