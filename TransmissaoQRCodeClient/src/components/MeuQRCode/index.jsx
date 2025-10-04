@@ -11,7 +11,7 @@ export function MeuQRCode(){
 
     return (
         <div style={{ width: '240px', height: '320px' }}>
-            <QRCodeCanvas style={{ width: '248px', height: '240px', marginBottom: '10px' }} value="https://reactjs.org/" />
+            {!codigo ? 'Carregando' : <QRCodeCanvas style={{ width: '248px', height: '240px', marginBottom: '10px' }} value={codigo} />}
             
             <div style={{display:'flex', flexDirection:'row', gap: '10px'}}>
                 <input disabled style={{ width: '100%', height: '40px', textAlign: 'center', fontSize: '14px' }} placeholder={codigo || ''} />
