@@ -39,9 +39,6 @@ export const socketStart = async () => {
       */
       socket.on('msg', ({ room, msg }) => {
 
-        console.log(msg)
-        console.log(room)
-
         /**
         * @description envia a mensagem para quem requisitou
         */
